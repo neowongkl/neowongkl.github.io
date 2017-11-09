@@ -105,24 +105,31 @@
       console.log("=== end removePathandPoint ===")
     }
 
-
     function drawPathandPoint(){
       console.log("=== start drawPathandPoint === ");
-      removePathandPoint()
+      removePathandPoint();
       for( var i = 0 ; i < pathPoints.length/2 ; i++){
-        var circle = new Konva.Circle({
-          x: pathPoints[i*2],
-          y: pathPoints[i*2+1],
-          radius: 50,
-          stroke: '#00FFFF',
-          strokeWidth: 2,
-          draggable: true,
-        });
-        circle.on('dragend', function(){
-          console.log(circle.getId());
-          var pos = stage.getPointerPosition();
-        })
-        layer.add(circle);
+        (function(){
+            var circle = new Konva.Circle({
+              x: pathPoints[i*2],
+              y: pathPoints[i*2+1],
+              radius: 50,
+              stroke: '#00FFFF',
+              strokeWidth: 2,
+              draggable: true,
+              id: i
+            });
+            circle.on('dragend', function(){
+              console.log(circle.getId());
+              var id = circle.getId();
+              var pos = stage.getPointerPosition();
+              pathPoints[2*id] = pos.x;
+              pathPoints[2*id+1] = pos.y;
+              drawPathandPoint();
+            })
+            layer.add(circle);
+        })();
+        
       }
       var arrow = new Konva.Arrow({
         x: 0,
