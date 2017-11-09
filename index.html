@@ -61,7 +61,7 @@
         shadowBlur: 5
       });
 
-      var rect = new Konva.Rect({
+      var rect1 = new Konva.Rect({
         x: stage.width() - squareLength,
         y: 0,
         width: squareLength,
@@ -69,6 +69,12 @@
         fill: 'green',
         stroke: 'black',
         strokeWidth: 1
+      });
+      // add points
+      rect1.on('click', function(){
+        pathPoints.push(stage.width() / 2);
+        pathPoints.push(stage.height() / 2);
+
       });
 
       var rect2 = new Konva.Rect({
@@ -81,7 +87,7 @@
         strokeWidth: 1
       });
 
-      layer.add(rect);
+      layer.add(rect1);
       layer.add(rect2);
       layer.add(image);
       drawPathandPoint();
@@ -110,11 +116,19 @@
       removePathandPoint();
       for( var i = 0 ; i < pathPoints.length/2 ; i++){
         (function(){
+            var color;
+            if( i == 0){
+                color = 'red';
+            }else if( i == pathPoints.length/2 -1){
+                color = 'green';
+            }else{
+                color = '#00FFFF';
+            } 
             var circle = new Konva.Circle({
               x: pathPoints[i*2],
               y: pathPoints[i*2+1],
               radius: 50,
-              stroke: '#00FFFF',
+              stroke: color,
               strokeWidth: 2,
               draggable: true,
               id: i
