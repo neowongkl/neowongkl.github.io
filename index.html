@@ -20,6 +20,7 @@
     var pathPoints;
     var stage;
     var layer;
+    var squareLength = 200;
 
     // initialize canvas 
     function initCanvas(){
@@ -61,20 +62,20 @@
       });
 
       var rect = new Konva.Rect({
-        x: stage.width() - 50,
+        x: stage.width() - squareLength,
         y: 0,
-        width: 50,
-        height: 50,
+        width: squareLength,
+        height: squareLength,
         fill: 'green',
         stroke: 'black',
         strokeWidth: 1
       });
 
       var rect2 = new Konva.Rect({
-        x: stage.width()  - 50,
-        y: 50,
-        width: 50,
-        height: 50,
+        x: stage.width()  - squareLength,
+        y: squareLength,
+        width: squareLength,
+        height: squareLength,
         fill: 'red',
         stroke: 'black',
         strokeWidth: 1
